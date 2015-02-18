@@ -1,0 +1,15 @@
+[Dashboard]
+type = "DashboardOutput"
+address = "{{ heka_dashboardoutput.host }}:{{ heka_dashboardoutput.port }}"
+{% if heka_dashboardoutput.interval is defined -%}
+  ticker_interval = {{ heka_dashboardoutput.interval }}
+{% endif %}
+{% if heka_dashboardoutput.message_matcher is defined -%}
+  message_matcher = "{{ heka_dashboardoutput.message_matcher }}"
+{% endif %}
+{% if heka_dashboardoutput.working_directory is defined -%}
+  working_directory = "{{ heka_dashboardoutput.working_directory }}"
+{% endif %}
+{% if heka_dashboardoutput.static_directory is defined -%}
+  static_directory = "{{ heka_dashboardoutput.static_directory }}"
+{% endif %}

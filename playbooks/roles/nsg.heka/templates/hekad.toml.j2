@@ -1,0 +1,19 @@
+[hekad]
+max_message_loops = {{ heka_max_message_loops }}
+max_process_inject = {{ heka_max_process_inject }}
+max_process_duration = {{ heka_max_process_duration }}
+max_timer_inject = {{ heka_max_timer_inject }}
+maxprocs = {{ heka_maxprocs }}
+poolsize = {{ heka_poolsize }}
+plugin_chansize = {{ heka_plugin_chansize }}
+base_dir = "{{ heka_base_dir }}"
+share_dir = "{{ heka_share_dir }}"
+{% if heka_cpuprof is defined -%}
+	cpuprof = "{{ heka_cpuprof }}"
+{% endif %}
+{% if heka_max_pack_idle is defined -%}
+max_pack_idle = "{{ heka_max_pack_idle }}"
+{% endif %}
+{% if heka_memprof is defined -%}
+	memprof = "{{ heka_memprof }}"
+{% endif %}

@@ -1,0 +1,21 @@
+---
+
+- name: Check for heka
+  shell: type hekad
+  register: heka_status
+  ignore_errors: True
+  changed_when: False
+
+- name: Download heka deb
+  get_url: url={{ heka_deb_url }} dest=/tmp/heka.deb
+  when: heka_status|failed
+
+- name: Install heka
+  apt: deb=/tmp/heka.deb
+  when: heka_status|failed
+
+- name: Clean up install deb
+  file: path=/tmp/heka.deb state=absent
+
+- name: Install hekad service
+  template: src=hekad_service.j2 dest=/etc/init.d/hekad mode=755

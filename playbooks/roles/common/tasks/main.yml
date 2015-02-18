@@ -1,0 +1,30 @@
+---
+  - name: Regenerate apt-cache
+    apt: update_cache=yes
+
+  - name: install default packages
+    apt: pkg={{ item }} state=installed
+    with_items:
+      - vim
+      - supervisor
+      - python-dev
+      - htop
+      - screen
+      - python-pycurl
+      - python-lxml
+      - git-core
+      - libncurses5-dev
+      - build-essential
+      - unzip
+      - curl
+      - libcurl3
+      - libssl1.0.0
+      - ghostscript
+      - libimage-exiftool-perl
+      - python-apt
+      - debian-keyring
+      - debian-archive-keyring
+      - libpng-dev
+      - poppler-utils
+      - libgcj12
+      - libsqlite3-dev

@@ -1,0 +1,16 @@
+[HttpListenInput]
+address = "192.168.111.222:8325"
+
+[ESJsonEncoder]
+index = "backend-general"
+es_index_from_timestamp = true
+type_name = "%{Type}" #Type = heka.httpdata.request
+#fields = ["Uuid","Timestamp","Type","Logger","Hostname","Payload"]
+
+[ElasticSearchOutput]
+message_matcher = "TRUE"
+#message_matcher = "Type == 'heka.httpdata.request' && Fields[UserAgent] == 'somedata'"
+server = "http://127.0.0.1:9200"
+flush_interval = 5000
+flush_count = 10
+encoder = "ESJsonEncoder"

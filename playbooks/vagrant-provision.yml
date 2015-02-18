@@ -1,0 +1,16 @@
+---
+- name: Heka+Elasticsearch
+  hosts: vagrant
+  sudo: yes
+  vars:
+      access_user: vagrant
+      heka_version: "0.8.3"
+      java_packages:
+          - openjdk-7-jre-headless
+
+  roles:
+    - common
+    - geerlingguy.java
+    - geerlingguy.elasticsearch
+    - nsg.heka
+    - heka-commands

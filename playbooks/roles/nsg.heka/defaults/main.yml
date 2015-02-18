@@ -1,0 +1,56 @@
+---
+
+##
+# Heka default configuration
+# This is the role defaults, set your values on the proper place: 
+# http://docs.ansible.com/playbooks_roles.html#role-default-variables
+##
+
+# What version to use, you finds a list here:
+# https://github.com/mozilla-services/heka/releases
+heka_version: "0.5.2"
+heka_arch: "amd64"
+heka_deb_url: "https://github.com/mozilla-services/heka/releases/download/v{{ heka_version }}/heka_{{ heka_version }}_{{ heka_arch }}.deb"
+
+# Hekad default config, this is the default values.
+# Commented out lines are examples, they are absent by default:
+# http://hekad.readthedocs.org/en/latest/config/index.html#global-configuration-options
+#heka_cpuprof: "/my/path"
+heka_max_message_loops: 4
+heka_max_process_inject: 1
+heka_max_process_duration: 100000
+heka_max_timer_inject: 10
+#heka_max_pack_idle: "2h"
+heka_maxprocs: 1
+#heka_memprof: "/my/path"
+heka_poolsize: 100
+heka_plugin_chansize: 50
+heka_base_dir: "/var/cache/hekad"
+heka_share_dir: "/usr/share/heka"
+
+# Misc
+heka_pid_file: "/var/run/hekad.pid"
+
+# Enable this to remove all old configuration before a run, this will cause a lot of
+# changes and reload hekad, but this is a easy way to start over and/or flush the config.
+heka_remove_all_configuration: false
+
+# A list of all the configurations to load. This list provision configuration files to
+# /etc/heka.d, if you remove a file from this list, the old config will still be there 
+# on the server(s) (and be loaded), you need to delete the old file your self or enable
+# heka_remove_all_configuration once. Config is loaded from templates/
+heka_extra_config:
+  - hekad_dashboard.toml
+
+##
+# Heka default configuration for shipped templates
+##
+
+# http://hekad.readthedocs.org/en/latest/config/outputs/index.html#dashboardoutput
+heka_dashboardoutput:
+  host: "0.0.0.0"
+  port: 4352
+#  message_matcher: ""
+#  message_signer: ""
+#  ticker_interval:
+

@@ -1,0 +1,11 @@
+---
+
+- name: Start hekad
+  service: name=hekad state=started
+
+- name: Stop hekad
+  service: name=hekad state=stopped
+
+- name: Restart hekad
+  service: name=hekad state=restarted
+

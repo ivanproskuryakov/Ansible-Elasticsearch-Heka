@@ -1,0 +1,24 @@
+---
+
+- name: Run tasks for a Debian system
+  include: 'debian.yml'
+  when: ansible_os_family  == "Debian"
+
+- name: Remove /etc/hekad.d, heka_remove_all_configuration is set
+  file: path=/etc/hekad.d state=absent
+  when: heka_remove_all_configuration
+
+- name: Make sure that /etc/hekad.d exists
+  file: path=/etc/hekad.d state=directory
+
+- name: Install hekad config
+  template: src=hekad.toml.j2 dest=/etc/hekad.d/00_hekad.toml
+  notify:
+    - Restart hekad
+
+- name: Install hekad outputs
+  template: src={{ item }}.j2 dest=/etc/hekad.d/{{ item }}
+  with_items:
+    - "{{ heka_extra_config }}"
+  notify:
+    - Restart hekad

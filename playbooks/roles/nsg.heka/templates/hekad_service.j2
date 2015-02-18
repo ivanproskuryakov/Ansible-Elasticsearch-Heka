@@ -1,0 +1,51 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:		hekad
+# Required-Start:	$remote_fs $syslog
+# Required-Stop:	$remote_fs $syslog
+# Default-Start:	2 3 4 5
+# Default-Stop:		
+# Short-Description:	Heka daemon
+### END INIT INFO
+
+set -e
+
+test -x /usr/bin/hekad || exit 0
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+	log_daemon_msg "Starting Heka daemon" "hekad" || true
+	if start-stop-daemon --start --quiet --oknodo --pidfile {{ heka_pid_file }} --make-pidfile \
+            --exec /usr/bin/hekad --background -- --config=/etc/hekad.d; then
+	    log_end_msg 0 || true
+	else
+	    log_end_msg 1 || true
+	fi
+	;;
+
+  stop)
+	log_daemon_msg "Stopping Heka daemon" "hekad" || true
+	if start-stop-daemon --stop --quiet --oknodo --pidfile {{ heka_pid_file }}; then
+	    log_end_msg 0 || true
+	else
+	    log_end_msg 1 || true
+	fi
+	;;
+
+  restart)
+	echo "TODO: not implemented"
+	;;
+
+  status)
+	status_of_proc -p {{ heka_pid_file }} /usr/bin/hekad hekad && exit 0 || exit $?
+	;;
+
+  *)
+	log_action_msg "Usage: /etc/init.d/hekad {start|stop|restart|status}" || true
+	exit 1
+esac
+
+exit 0
