@@ -14,7 +14,7 @@ ssh -p 22 vagrant@192.168.111.222 / user: vagrant
 ```
 
 ## Heka usage
-Heka listen 192.168.111.222:8325 for a data. To check, just open in browser **http://192.168.111.222:8325/?ParamA=mydata**<br/>
+Heka listen 192.168.111.222:8325 for a data. To check, just open in browser http://192.168.111.222:8325/?ParamA=mydata<br/>
 Then run one of the following on Vagrant's host to check Elastic
 ```
 curl http://127.0.0.1:9200/_search?pretty
