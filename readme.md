@@ -42,7 +42,7 @@ type_name = "%{Type}" #Type = heka.httpdata.request
 [ElasticSearchOutput]
 message_matcher = "TRUE"
 #message_matcher = "Type == 'heka.httpdata.request' && Fields[UserAgent] == 'somedata'"
-server = "http://127.0.0.1:9200"
+server = "http://192.168.111.222:9200"
 flush_interval = 5000
 flush_count = 10
 encoder = "ESJsonEncoder"
