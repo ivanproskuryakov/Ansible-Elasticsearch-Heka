@@ -13,4 +13,4 @@
     - geerlingguy.java
     - geerlingguy.elasticsearch
     - nsg.heka
-    - heka-commands
+    - commands

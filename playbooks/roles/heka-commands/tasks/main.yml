@@ -1,6 +1,0 @@
----
-- name: Copy Heka config
-  template: src=../heka/main.toml dest=/etc/hekad.d/hekad_dashboard.toml
-
-- name: Restart hekad
-  service: name=hekad state=restarted

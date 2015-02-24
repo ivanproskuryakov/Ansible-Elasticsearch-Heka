@@ -10,16 +10,22 @@ Provision vagrant with ansible
 
 ## Access vagrant
 ```
-ssh -p 22 vagrant@192.168.111.222 / user: vagrant
+ssh -p 22 vagrant@192.168.111.222 / password: vagrant
 ```
 
 ## Heka usage
-Heka listen 192.168.111.222:8325 for a data. To check, just open in browser http://192.168.111.222:8325/?ParamA=mydata<br/>
-Then run one of the following on Vagrant's host to check Elastic
+Heka listen 192.168.111.222:8325 for a data. To check is her, just open in browser: http://192.168.111.222:8325/?ParamA=mydata<br/>
+This will populate Elastic with the data "ParamA=mydata", to check use following
 ```
-curl http://127.0.0.1:9200/_search?pretty
-curl http://127.0.0.1:9200/_search?pretty | grep ParamA
+curl http://192.168.111.222:9200/_search?pretty
+curl http://192.168.111.222:9200/_search?pretty | grep ParamA
 
+```
+or open in browser: http://192.168.111.222:9200/_search?pretty
+
+Flush Elastic index:
+```
+curl -XDELETE localhost:9200/backend-general
 ```
 
 Config: /playbooks/roles/heka-commands/heka/main.toml

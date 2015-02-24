@@ -1,0 +1,12 @@
+---
+- name: Copy Heka config
+  template: src=../heka/main.toml dest=/etc/hekad.d/hekad_dashboard.toml
+
+- name: Copy Elastic config
+  template: src=../elasticsearch/elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml
+
+- name: Restart hekad
+  service: name=hekad state=restarted
+
+- name: Restart elasticsearch
+  service: name=elasticsearch state=restarted
